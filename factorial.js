@@ -1,26 +1,23 @@
-const express = require("express")
-const path = require('path')
-const app = express()
+var express = require("express");
+var app = express();
+app.get("/:factorial" ,function(req,res)
+{
+  let x = req.params["factorial"];
+  let Factorial_of_x = Factorial(x*1);
+  res.send(Factorial_of_x.toString())
+})
+app.listen(8080);
 
-var port = process.env.port || 3000
-
-// View Engine Setup
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var myNumber = req.url;
-  res.write(myNumber);
-  res.end();
-}).listen(8080);
-
-
-
-function factorial(num) {
-    if (num < 0) 
-          return -1;
-    else if (num == 0) 
-        return 1;
-    else {
-        return (num * factorialize(num - 1));
+function Factorial( number)
+{
+	if(number==0)	
+	{
+		return 1;
+	}	else
+		{
+			return number * Factorial(number-1);
     }
-  }
+}
+
+
+
